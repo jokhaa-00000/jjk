@@ -74,7 +74,7 @@ document.addEventListener("click", async (e) => {
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#d33",
-    cancelButtonColor: "#1c2a38",
+    cancelButtonColor: "#0080ff",
     confirmButtonText: "delete",
     cancelButtonText: "cancel",
   }).then(async (result) => {

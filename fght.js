@@ -143,7 +143,6 @@ document.addEventListener("change", async (e) => {
     const newFav = await res.json();
     favs.push(newFav);
 
-    // ✅ SweetAlert ADD
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -152,20 +151,19 @@ document.addEventListener("change", async (e) => {
       timer: 1500,
     });
   } else {
-    // ❗ CONFIRM DELETE
     const favToDelete = favs.find((f) => f.fighterId === fighter.fighterId);
 
     if (!favToDelete) return;
 
     Swal.fire({
-      title: "დარწმუნებული ხარ?",
-      text: `${fighter.name} ფავორიტებიდან წაიშლება`,
+      title: "are you sure?",
+      text: `${fighter.name} will be removed from favorites`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#1c2a38",
-      confirmButtonText: "კი, წაშალე",
-      cancelButtonText: "გაუქმება",
+      confirmButtonText: "delete",
+      cancelButtonText: "cancel",
     }).then(async (result) => {
       if (result.isConfirmed) {
         // ✅ DELETE
@@ -179,7 +177,7 @@ document.addEventListener("change", async (e) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "წაიშალა ",
+          title: "deleted from favorites",
           showConfirmButton: false,
           timer: 1500,
         });
