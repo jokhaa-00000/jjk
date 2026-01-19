@@ -5,6 +5,12 @@ if (rankingslink) {
     window.location.href = "joxa.html";
   });
 }
+const homepage = document.getElementById("logo");
+if (homepage) {
+  homepage.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
 
 const homeLink = document.querySelector("#home-link");
 if (homeLink) {
