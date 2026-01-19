@@ -67,21 +67,46 @@ document.addEventListener("click", async (e) => {
   const favId = button.dataset.id;
   const favName = button.dataset.name;
 
-  const confirmDelete = confirm(
-    `Are you sure you want to delete ${favName} from favs?`
-  );
-  if (!confirmDelete) return;
+  // ❗ SweetAlert confirm
+  Swal.fire({
+    title: "are you sure?",
+    text: `${favName} will be removed from favorites`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#1c2a38",
+    confirmButtonText: "delete",
+    cancelButtonText: "cancel",
+  }).then(async (result) => {
+    if (!result.isConfirmed) return;
 
-  try {
-    await fetch(`${FAVS_API}/${favId}`, { method: "DELETE" });
-    alert(`${favName} deleted from favorites`);
-    // Update local favs and re-render
-    favs = favs.filter((f) => f.id !== favId);
-    renderFavs(favs);
-  } catch (err) {
-    console.error("Error deleting favorite:", err);
-    alert("Failed to delete favorite.");
-  }
+    try {
+      // ✅ DELETE
+      await fetch(`${FAVS_API}/${favId}`, { method: "DELETE" });
+
+      // update local state
+      favs = favs.filter((f) => f.id !== favId);
+      renderFavs(favs);
+
+      // ✅ Success alert
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${favName} has been removed from favorites`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (err) {
+      console.error("Error deleting favorite:", err);
+
+      // ❌ Error alert
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Failed to delete favorite. Please try again later.",
+      });
+    }
+  });
 });
 
 /* ================= INIT ================= */

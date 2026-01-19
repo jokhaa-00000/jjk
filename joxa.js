@@ -139,19 +139,58 @@ document.addEventListener("change", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fighter),
     });
+
     const newFav = await res.json();
     favs.push(newFav);
-    alert(`${fighter.name} added to favs`);
+
+    // ✅ SweetAlert ADD
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `${fighter.name} has been added to favorites`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   } else {
-    // DELETE from favs
+    // ❗ CONFIRM DELETE
     const favToDelete = favs.find((f) => f.fighterId === fighter.fighterId);
-    if (favToDelete) {
-      await fetch(`${FAVS_API}/${favToDelete.id}`, { method: "DELETE" });
-      favs = favs.filter((f) => f.fighterId !== fighter.fighterId);
-      alert(`${fighter.name} deleted from favs`);
-    }
+
+    if (!favToDelete) return;
+
+    Swal.fire({
+      title: "დარწმუნებული ხარ?",
+      text: `${fighter.name} ფავორიტებიდან წაიშლება`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#1c2a38",
+      confirmButtonText: "კი, წაშალე",
+      cancelButtonText: "გაუქმება",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // ✅ DELETE
+        await fetch(`${FAVS_API}/${favToDelete.id}`, {
+          method: "DELETE",
+        });
+
+        favs = favs.filter((f) => f.fighterId !== fighter.fighterId);
+
+        // ✅ Success alert
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "წაიშალა ",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        // ❌ თუ გააუქმა, checkbox ისევ მონიშნული დარჩეს
+        checkbox.checked = true;
+      }
+    });
   }
 });
+
 const favlink = document.querySelector("#favs-link");
 
 if (favlink) {

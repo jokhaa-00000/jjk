@@ -20,10 +20,22 @@ loginForm.addEventListener("submit", function (e) {
 
   if (isDefaultUser || isRegisteredUser) {
     localStorage.setItem("isLoggedIn", "true");
-    alert("Login successful! welcome back, " + username + "!");
-    window.location.href = "index.html";
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Welcome back, " + username + "!",
+      showConfirmButton: false,
+      timer: 1500,
+    }).then(() => {
+      window.location.href = "index.html";
+    });
   } else {
-    alert("Wrong username or password!");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Wrong username or password!",
+    });
   }
 });
 

@@ -1,5 +1,10 @@
 const contactLink = document.querySelector("#contact-link");
-
+const homepage = document.getElementById("logo");
+if (homepage) {
+  homepage.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
 if (contactLink) {
   contactLink.addEventListener("click", () => {
     window.location.href = "contact.html";

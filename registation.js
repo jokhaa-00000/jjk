@@ -9,8 +9,9 @@ registerForm.addEventListener("submit", (e) => {
   const favoriteFighter = document.getElementById("regFighter").value.trim();
   const gender = document.getElementById("regGender").value;
 
+  // ❌ EMPTY FIELDS — SweetAlert
   if (!username || !email || !password || !favoriteFighter || !gender) {
-    alert("Please fill in all fields!");
+    Swal.fire("SweetAlert2 is working!");
     return;
   }
 
@@ -25,9 +26,17 @@ registerForm.addEventListener("submit", (e) => {
 
   localStorage.setItem("userData", JSON.stringify(userData));
 
-  // AUTO LOGIN (same logic as login page)
+  // AUTO LOGIN
   localStorage.setItem("isLoggedIn", "true");
 
-  alert("Registration successful! Welcome aboard, " + username + "!");
-  window.location.href = "index.html";
+  // ✅ SUCCESS SweetAlert
+  Swal.fire({
+    icon: "success",
+    title: "Registration successful ",
+    text: "Welcome aboard, " + username + "!",
+    timer: 1800,
+    showConfirmButton: false,
+  }).then(() => {
+    window.location.href = "index.html";
+  });
 });

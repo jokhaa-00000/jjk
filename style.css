@@ -218,8 +218,14 @@ p {
 
 body {
   margin: 0;
-  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial;
+  font-family:
+    "Montserrat",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
   background: var(--bg);
   color: var(--text);
 }
@@ -493,7 +499,7 @@ textarea {
 button {
   width: 160px;
   padding: 14px;
-  background-color: #142133;
+  background-color: #f7ca00;
   color: white;
   font-weight: bold;
   border: none;
@@ -504,8 +510,8 @@ button {
 }
 
 button:hover {
-  background-color: #f7ca00;
-  color: #142133;
+  background-color: #1c2a38;
+  color: #f7ca00;
 }
 
 @media (max-width: 620px) {
@@ -568,7 +574,7 @@ button:hover {
     left: 0;
     transition: 0.3s;
     backdrop-filter: 20px;
-    background-color: rgb(40, 39, 39);
+    background: rgba(28, 42, 56, 0.95);
     justify-content: center;
     align-items: center;
   }
@@ -645,7 +651,7 @@ nav a:hover {
 .hamburger span {
   height: 3px;
   width: 25px;
-  background: black;
+  background: rgb(255, 255, 255);
   margin: 4px 0;
   transition: 0.4s;
 }
@@ -674,7 +680,7 @@ nav a:hover {
     position: absolute;
     top: 70px;
     right: 40px;
-    background: #1c2833;
+    background: #1c2a38;
     flex-direction: column;
     width: 160px;
     border-radius: 10px;
@@ -750,7 +756,7 @@ header {
     width: 100%;
     height: 100vh; /* mTeli ekranis simaRle */
 
-    background-color: rgba(13, 71, 161, 0.95); /* Molurjo backgroundi */
+    background-color: rgba(13, 161, 18, 0.95); /* Molurjo backgroundi */
     z-index: 1000; /* MniSvnelovania, rom yvelaferi dafaros */
 
     /* Animacia: 0.4 wamshi gamoichineba/gadadis */
@@ -835,12 +841,7 @@ header {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(
-      13,
-      71,
-      161,
-      0.95
-    ); /* Molurjo backgroundi (SegiZliaT es feri SecvaloT) */
+    background-color: #1c2a38; /* Molurjo backgroundi (SegiZliaT es feri SecvaloT) */
     z-index: 1000;
 
     /* Ani-macia: 0.4 wamshi gamoichineba/gadadis */
@@ -1294,4 +1295,25 @@ header {
   color: #edc920;
   text-decoration: none;
   font-weight: bold;
+}
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger .bar {
+  width: 26px;
+  height: 3px;
+  background-color: #edc920; /* 🟡 აქ შეცვლი ფერს */
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
 }
