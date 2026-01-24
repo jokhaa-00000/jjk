@@ -12,26 +12,33 @@ if (!userData) {
 }
 
 // ===== SHOW USER INFO =====
-document.getElementById("profileUsername").textContent = userData.username;
-document.getElementById("profileEmail").textContent = userData.email;
-document.getElementById("password").textContent = userData.password;
+// document.getElementById("profileUsername").textContent = userData.username;
+// document.getElementById("profileEmail").textContent = userData.email;
+// document.getElementById("password").textContent = userData.password;
 
-// ===== FAVORITE FIGHTER =====
+const favInput1 = document.getElementById("profileUsername");
+const favInput2 = document.getElementById("profileEmail");
+const favInput3 = document.getElementById("password");
 const favInput = document.getElementById("favFighter");
 
 // თუ რეგისტრაციის დროს შეიყვანა
 favInput.value = userData.favoriteFighter || "";
-
+favInput1.value = userData.username || "";
+favInput2.value = userData.email || "";
+favInput3.value = userData.password || "";
 // ===== SAVE FAVORITE FIGHTER =====
-document.getElementById("saveFighter").addEventListener("click", () => {
+document.getElementById("saveChanges").addEventListener("click", () => {
   userData.favoriteFighter = favInput.value;
+  userData.username = favInput1.value;
+  userData.email = favInput2.value;
+  userData.password = favInput3.value;
   localStorage.setItem("userData", JSON.stringify(userData));
 
   // ✅ TOP-RIGHT SUCCESS ALERT
   Swal.fire({
     position: "top-end",
     icon: "success",
-    title: "Favorite fighter saved!",
+    title: "Changes saved!",
     showConfirmButton: false,
     timer: 1500,
   });
